@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pet_shop_app/views/%20edit_information_screen.dart';
 import 'package:pet_shop_app/views/%20forgot_password.dart';
-import 'package:pet_shop_app/views/home_screen.dart';
+import 'package:pet_shop_app/views/%20product_details.dart';
+import 'package:pet_shop_app/views/cart_screen.dart';
+import 'package:pet_shop_app/views/home.dart';
 import 'package:pet_shop_app/views/login_screen.dart';
+import 'package:pet_shop_app/views/order_screen.dart';
 import 'package:pet_shop_app/views/register_screen.dart';
 import 'package:pet_shop_app/views/splash_screen.dart';
 
@@ -20,7 +24,7 @@ class AppRouter{
             );
           case AppRouterName.Home:
             return MaterialPageRoute(
-              builder: (context) => const HomeScreen(),
+              builder: (context) => const Home(),
               settings: settings,
             );    
           case AppRouterName.Register:
@@ -32,7 +36,27 @@ class AppRouter{
             return MaterialPageRoute(
               builder: (context) => const ForgotPasswordScreen(),
               settings: settings,
-            );        
+            );
+          case AppRouterName.ProductDetails:
+            return MaterialPageRoute(
+              builder: (context) => const ProductDetailsScreen(),
+              settings: settings,
+            ); 
+          case AppRouterName.Cart:
+            return MaterialPageRoute(
+              builder: (context) => const CartScreen(),
+              settings: settings,
+            );
+          case AppRouterName.Order:
+            return MaterialPageRoute(
+              builder: (context) => const OrderScreen(),
+              settings: settings,
+            );
+          case AppRouterName.Information:
+            return MaterialPageRoute(
+              builder: (context) => const EditInformationScreen(),
+              settings: settings,
+            );                    
           // case "/login":
           //   return MaterialPageRoute(
           //     builder: (context) => const Login(title: "dang nhap "),
@@ -55,5 +79,9 @@ class AppRouterName{
  static const Login="/login";
   static const Register="/register"; 
  static const ForgotPassword="/forgotPassword";
- static const Home="/home";  
+ static const Home="/home";
+ static const ProductDetails ="/productDetails"; 
+ static const Cart="/cart";
+ static const Order="/order";
+ static const Information="information";
 }

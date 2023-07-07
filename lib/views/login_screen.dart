@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, AppRouterName.Home);
+                     Navigator.pushNamed(context, AppRouterName.Home);
                     },
                     child: Container(
                       alignment: Alignment.center,
