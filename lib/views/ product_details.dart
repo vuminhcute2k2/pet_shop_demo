@@ -2,6 +2,7 @@ import 'package:counter_button/counter_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:pet_shop_app/router/app_router.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({super.key});
@@ -187,29 +188,88 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   SizedBox(
                     height: 16,
                   ),
+                  // Container(
+                  //     width: 130,
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  //       color: Colors.white,
+                  //     ),
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       children: <Widget>[
+                  //         IconButton(
+                  //           icon: Icon(Icons.add),
+                  //           onPressed: _incrementCounter,
+                  //         ),
+                  //         Text(
+                  //           '$_counter',
+                  //           style: TextStyle(fontSize: 24.0),
+                  //         ),
+                  //         IconButton(
+                  //           icon: Icon(Icons.remove),
+                  //           onPressed: _decrementCounter,
+                  //         ),
+                  //       ],
+                  //     )),
                   Container(
-                      width: 130,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                        color: Colors.white,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          IconButton(
-                            icon: Icon(Icons.add),
-                            onPressed: _incrementCounter,
+                    child: Row(
+                      children: [
+                        Container(
+                            width: 130,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8.0)),
+                              color: Colors.white,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                IconButton(
+                                  icon: Icon(Icons.add),
+                                  onPressed: _incrementCounter,
+                                ),
+                                Text(
+                                  '$_counter',
+                                  style: TextStyle(fontSize: 24.0),
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.remove),
+                                  onPressed: _decrementCounter,
+                                ),
+                              ],
+                            )),
+                        Expanded(
+                          child: Container(
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.pushNamed(context, AppRouterName.Cart);
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.symmetric(vertical: 16),
+                                margin:
+                                    const EdgeInsets.only(left: 20, right: 20),
+                                width: 140,
+                                child: Text(
+                                  'Mua hàng',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontFamily: 'fonts/Roboto-Bold.ttf',
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                            ),
                           ),
-                          Text(
-                            '$_counter',
-                            style: TextStyle(fontSize: 24.0),
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.remove),
-                            onPressed: _decrementCounter,
-                          ),
-                        ],
-                      )),
+                        ),
+                      ],
+                    ),
+                  ),
                   SizedBox(
                     height: 16,
                   ),
@@ -380,8 +440,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         Container(
                           //width: 80,
                           height: 100,
-                          margin:
-                              const EdgeInsets.only(bottom: 10, top: 10,left: 10,right: 10),
+                          margin: const EdgeInsets.only(
+                              bottom: 10, top: 10, left: 10, right: 10),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(35),
                             child:

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:pet_shop_app/router/app_router.dart';
+import 'package:pet_shop_app/common/authentication.dart';
 import 'package:pet_shop_app/views/login_screen.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -98,8 +99,9 @@ class _AccountScreenState extends State<AccountScreen> {
                 ),
                 Container(
                   child: GestureDetector(
-                    onTap: () {
-                    Navigator.pushNamed(context, AppRouterName.Login);
+                    onTap: ()async {
+                    //Navigator.pushNamed(context, AppRouterName.WidgetTree);
+                    await Auth().logout();
                     },
                     child: Container(
                       alignment: Alignment.center,

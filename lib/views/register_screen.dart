@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:pet_shop_app/router/app_router.dart';
+import 'package:pet_shop_app/common/authentication.dart';
+
+import '../utils/utils.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -10,19 +14,57 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  late final TextEditingController usernameController;
+  late final TextEditingController emailController;
+  late final TextEditingController firtnameController;
+  late final TextEditingController lastnameController;
   late final TextEditingController passwordController;
-  String? usernameValue;
+  late final TextEditingController confirmpasswordController;
+  String? emailValue;
+  String? firtnameValue;
+  String? lastnameValue;
   String? passwordValue;
-  String? usernameError;
+  String? emailError;
   String? passwordError;
+  String? confirmpasswordValue;
   var _isObscured;
+  bool _isloading=false;
   @override
   void initState() {
-    usernameController = TextEditingController(text: usernameValue);
+    emailController = TextEditingController(text: emailValue);
+    firtnameController = TextEditingController(text: firtnameValue);
+    lastnameController = TextEditingController(text: lastnameValue);
     passwordController = TextEditingController(text: passwordValue);
+    confirmpasswordController =TextEditingController(text: confirmpasswordValue);
     super.initState();
     _isObscured = true;
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    emailController.dispose();
+    firtnameController.dispose();
+    lastnameController.dispose();
+    passwordController.dispose();
+    confirmpasswordController.dispose();
+    super.dispose();
+  }
+  void signUpUser() async{
+    setState(() {
+      _isloading =true;
+    });
+    // String res = await Auth().loginUser(email: emailController.text.trim(), password: passwordController.text.trim());
+    String res = await Auth().signUpUser(email: emailController.text.trim(), firtname: firtnameController.text.trim(), lastname: lastnameController.text.trim(), password: passwordController.text.trim(),);
+    if(res !="success"){
+      showSnackBar(res,context);
+    }else{
+       Navigator.pushNamed(context, AppRouterName.Home);
+    }
+    setState(() {
+      _isloading =false;
+    });
+  }
+  void navigateToLogin(){
+   Navigator.pushNamed(context, AppRouterName.Login);
   }
 
   @override
@@ -50,6 +92,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Container(
                 // margin: const EdgeInsets.only(left: 20, right: 20),
                 child: TextField(
+                  onChanged: (String value) {
+                    emailValue = value;
+                  },
+                  
+                  controller: emailController,
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
@@ -73,6 +120,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Container(
                 // margin: const EdgeInsets.only(left: 20, right: 20),
                 child: TextField(
+                  onChanged: (String value) {
+                    firtnameValue = value;
+                  },
+                  controller: firtnameController,
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
@@ -96,6 +147,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Container(
                 // margin: const EdgeInsets.only(left: 20, right: 20),
                 child: TextField(
+                  onChanged: (String value) {
+                    lastnameValue = value;
+                  },
+                  controller: lastnameController,
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
@@ -159,10 +214,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 //margin: const EdgeInsets.only(left: 20, right: 20),
                 child: TextField(
                   onChanged: (String value) {
-                    passwordValue = value;
+                    confirmpasswordValue = value;
                   },
                   obscureText: _isObscured,
-                  controller: passwordController,
+                  controller: confirmpasswordController,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock),
                     errorText: passwordError,
@@ -201,9 +256,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Padding(padding: EdgeInsets.only(left: 20)),
                   Text('Bạn đã có tài khoản ?'),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
+                    onTap: navigateToLogin,
                     child: Text(
                       'Đăng nhập!',
                       style: TextStyle(
@@ -218,7 +271,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               Container(
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: signUpUser,
                   child: Container(
                     alignment: Alignment.center,
                     padding: EdgeInsets.symmetric(vertical: 16),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
+import 'package:pet_shop_app/controller/cart_contoller.dart';
 
 class OrderScreen extends StatefulWidget {
   const OrderScreen({super.key});
@@ -10,6 +12,10 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
+  final CartController cartController = Get.find();
+  // final List<Map<String, dynamic>> selectedItems =
+  //       Get.arguments as List<Map<String, dynamic>>;
+  final List<Map<String, dynamic>> selectedItems = Get.arguments;
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
@@ -69,7 +75,11 @@ class _OrderScreenState extends State<OrderScreen> {
                   scrollDirection: Axis.vertical,
                   //itemCount: ,
                   itemBuilder: (context, index) {
-                   
+                    Map<String, dynamic> item = selectedItems[index];
+                return ListTile(
+                title: Text(item['name']),
+                subtitle: Text('${item['price']}đ'),
+              );
                   },
                 ),
               ),

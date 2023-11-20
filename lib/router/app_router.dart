@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:pet_shop_app/views/%20edit_information_screen.dart';
 import 'package:pet_shop_app/views/%20forgot_password.dart';
 import 'package:pet_shop_app/views/%20product_details.dart';
-import 'package:pet_shop_app/views/cart_screen.dart';
+import 'package:pet_shop_app/views/cart.dart';
 import 'package:pet_shop_app/views/home.dart';
 import 'package:pet_shop_app/views/login_screen.dart';
 import 'package:pet_shop_app/views/order_screen.dart';
 import 'package:pet_shop_app/views/register_screen.dart';
+import 'package:pet_shop_app/views/search_screen.dart';
 import 'package:pet_shop_app/views/splash_screen.dart';
+import 'package:pet_shop_app/views/widget_tree.dart';
 
 class AppRouter{
   static MaterialPageRoute? onGenerateRoute(RouteSettings settings) {
@@ -17,11 +19,16 @@ class AppRouter{
               builder: (context) => const SplashScreen(),
               settings: settings,
             );
-          case AppRouterName.Login:
+          case AppRouterName.WidgetTree:
             return MaterialPageRoute(
-              builder: (context) => const LoginScreen(),
+              builder: (context) => const WidgetTree(),
               settings: settings,
-            );
+            );  
+          // case AppRouterName.Login:
+          //   return MaterialPageRoute(
+          //     builder: (context) => const LoginScreen(),
+          //     settings: settings,
+          //   );
           case AppRouterName.Home:
             return MaterialPageRoute(
               builder: (context) => const Home(),
@@ -44,7 +51,7 @@ class AppRouter{
             ); 
           case AppRouterName.Cart:
             return MaterialPageRoute(
-              builder: (context) => const CartScreen(),
+              builder: (context) => const Cart(),
               settings: settings,
             );
           case AppRouterName.Order:
@@ -55,6 +62,11 @@ class AppRouter{
           case AppRouterName.Information:
             return MaterialPageRoute(
               builder: (context) => const EditInformationScreen(),
+              settings: settings,
+            );  
+          case AppRouterName.Search:
+            return MaterialPageRoute(
+              builder: (context) => const SearchScreen(),
               settings: settings,
             );                    
           // case "/login":
@@ -83,5 +95,7 @@ class AppRouterName{
  static const ProductDetails ="/productDetails"; 
  static const Cart="/cart";
  static const Order="/order";
- static const Information="information";
+ static const Information="/information";
+ static const WidgetTree="/widgettree";
+ static const Search="/search";
 }

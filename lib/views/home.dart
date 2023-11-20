@@ -1,5 +1,7 @@
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -7,6 +9,7 @@ import 'package:pet_shop_app/views/account_screen.dart';
 import 'package:pet_shop_app/views/feed_screen.dart';
 import 'package:pet_shop_app/views/home_screen.dart';
 import 'package:pet_shop_app/views/notification_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -16,6 +19,23 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  SharedPreferences? prefs;
+  String username ="";
+  void initSharedPref() async {
+    // Doi shared prefs nay phai khoi tao xong
+    prefs = await SharedPreferences.getInstance();
+  }
+  @override
+  void initState() {
+    initSharedPref();
+    getUserName();
+    //_homeCubit.getItems();
+    super.initState();
+  }
+  void getUserName()async{
+    DocumentSnapshot snap = await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).get(); 
+    print(snap.data());
+  }
   int currentTab=0;
   final List<Widget> screens =[
     //chuyển màn cho bottom bar
